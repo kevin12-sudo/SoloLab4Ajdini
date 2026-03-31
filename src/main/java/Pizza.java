@@ -1,22 +1,26 @@
-/**
- * Name: Kevin Ajdini
- * Date: March 30, 2025
- * Description: Pizza class with fields, constructor, getters and setters
+/** Project: Lab 4
+ * Purpose Details: Homework
+ * Course: IST 242
+ * Author: Kevin Ajdini
+ * Date Developed: March 30th 2026
+ * Last Date Changed: March 31st 2026
+ * Rev: Added some extra stuff
+
  */
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+/**  Creates Pizza class*/
 public class Pizza {
 
-    // Fields
+    /** feilds */
     private String size;
     private String crust;
     private String topping;
     private double price;
 
-    // Default constructor (required for Jackson)
+
     public Pizza() {}
 
-    // Constructor
+    /** constructors */
     public Pizza(String size, String crust, String topping, double price) {
         this.size = size;
         this.crust = crust;
@@ -24,30 +28,30 @@ public class Pizza {
         this.price = price;
     }
 
-    // Getters
+    /** getters */
     public String getSize() { return size; }
     public String getCrust() { return crust; }
     public String getTopping() { return topping; }
     public double getPrice() { return price; }
 
-    // Setters
+    /** setters */
     public void setSize(String size) { this.size = size; }
     public void setCrust(String crust) { this.crust = crust; }
     public void setTopping(String topping) { this.topping = topping; }
     public void setPrice(double price) { this.price = price; }
 
-    // Flat file format
+    /** Flat file formatting*/
     public String toFlatFile() {
         return size + "|" + crust + "|" + topping + "|" + price;
     }
 
-    // Serialize to JSON string
+    /** to JSON string */
     public String toJSON() throws Exception {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.writeValueAsString(this);
     }
 
-    // Print to console
+    /** print */
     @Override
     public String toString() {
         return "Pizza [size=" + size + ", crust=" + crust +

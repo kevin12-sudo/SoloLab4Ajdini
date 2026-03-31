@@ -1,26 +1,30 @@
-/**
- * Name: Kevin Ajdini
- * Date: March 30, 2025
- * Description: Sends a Pizza object as flat file and JSON via RabbitMQ
+/** Project: Lab 4
+ * Purpose Details: Homework
+ * Course: IST 242
+ * Author: Kevin Ajdini
+ * Date Developed: March 30th 2026
+ * Last Date Changed: March 31st 2026
+ * Rev: Added some extra stuff
+
  */
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.Channel;
 
 public class RabbitMQsend {
-
+/** Name of RabbitMQ queue */
     private final static String QUEUE_NAME = "pizzaQueue";
 
     public static void main(String[] args) throws Exception {
 
-        // Create a pizza object
-        Pizza pizza = new Pizza("large", "thin", "pepperoni", 12.99);
+        /** creates the pizza object*/
+        Pizza pizza = new Pizza("Small", "Stuffed", "Mushrooms", 20.95);
 
-        // Convert to flat file and JSON
+        /** converting flat file and JSON*/
         String flatFile = pizza.toFlatFile();
         String json = pizza.toJSON();
 
-        // Connect to RabbitMQ
+        /** connects to rabbitmq*/
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
 
@@ -29,11 +33,11 @@ public class RabbitMQsend {
 
             channel.queueDeclare(QUEUE_NAME, false, false, false, null);
 
-            // Send flat file
+            /** sends flat file*/
             channel.basicPublish("", QUEUE_NAME, null, flatFile.getBytes());
             System.out.println("Sent flat file: " + flatFile);
 
-            // Send JSON
+            /** sends JSON */
             channel.basicPublish("", QUEUE_NAME, null, json.getBytes());
             System.out.println("Sent JSON: " + json);
         }
